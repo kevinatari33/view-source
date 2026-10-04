@@ -1,126 +1,378 @@
-<!DOCTYPE HTML>
-
-<!--
-  The purpose of this versiona is not to match the figma design.
-  Instead we are establishing
-  1. Correct HTML document structure
-  2. Semantic sections
-  3. All manifesto content 
-  4. A meaningful source link
--->
-
-<html>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
   <meta charset="UTF-8">
-  <title>
-    Is Your Phone Your Friend>
-  </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Is Your Phone Your Friend?</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background: #a5b52a;
+      font-family: Arial, Helvetica, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Main 480px poster container */
+    .page {
+      position: relative;
+      width: 480px;
+      height: 480px;
+      margin: 0 auto;
+      overflow: hidden;
+      background: #a5b52a;
+      color: #dce52a;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Top-left phrase staircase */
+    .what {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      font-size: 13px;
+      line-height: 1;
+    }
+
+    .what span {
+      display: block;
+      margin-bottom: 7px;
+    }
+
+    .what .do-one {
+      margin-left: 35px;
+    }
+
+    .what .do-two {
+      margin-left: 62px;
+    }
+
+    .what .do-three {
+      margin-left: 82px;
+    }
+
+    /* Top-right tech companies list */
+    .companies {
+      position: absolute;
+      top: 51px;
+      right: 42px;
+      text-align: right;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .companies span {
+      display: block;
+    }
+
+    /* Center visual composition */
+    .visual {
+      position: absolute;
+      top: 105px;
+      left: 0;
+      width: 100%;
+      height: 160px;
+    }
+
+    /* THEY sits behind YOU */
+    .they {
+      position: absolute;
+      top: 38px;
+      left: 73px;
+      color: #7d8b18;
+      font-size: 58px;
+      font-weight: 400;
+      line-height: 1;
+      z-index: 1;
+    }
+
+    /* YOU overlaps THEY */
+    .you {
+      position: absolute;
+      top: 63px;
+      left: 144px;
+      color: #dce52a;
+      font-size: 59px;
+      font-weight: 400;
+      line-height: 1;
+      z-index: 3;
+    }
+
+    /* Question mark background graphic */
+    .question-mark {
+      position: absolute;
+      top: 8px;
+      left: 254px;
+      color: #7d8b18;
+      font-size: 145px;
+      font-weight: 400;
+      line-height: 1;
+      z-index: 0;
+    }
+
+    /* Word switch on hover: KNOW <-> OWN */
+    .word-switch {
+      position: absolute;
+      top: 111px;
+      left: 108px;
+      font-size: 23px;
+      line-height: 1;
+      cursor: pointer;
+      z-index: 4;
+      user-select: none;
+      display: inline-block;
+    }
+
+    .word-switch .know {
+      display: inline-block;
+      color: #dce52a;
+      transition: opacity 0.2s ease;
+    }
+
+    .word-switch .own {
+      display: none;
+      color: #7d8b18;
+      transition: opacity 0.2s ease;
+    }
+
+    /* Hovering switches KNOW to OWN */
+    .word-switch:hover .know {
+      display: none;
+    }
+
+    .word-switch:hover .own {
+      display: inline-block;
+    }
+
+    /* Side quote text */
+    .free-text {
+      position: absolute;
+      top: 242px;
+      right: 77px;
+      color: #7d8b18;
+      font-size: 11px;
+      line-height: 1.35;
+      text-align: left;
+    }
+
+    /* Horizontal divider */
+    .line {
+      position: absolute;
+      top: 284px;
+      left: 20px;
+      width: 440px;
+      height: 1px;
+      background: #7d8b18;
+    }
+
+    /* Main header */
+    .main-title {
+      position: absolute;
+      top: 299px;
+      left: 34px;
+      margin: 0;
+      color: #dce52a;
+      font-size: 25px;
+      font-weight: 400;
+      line-height: 1;
+      letter-spacing: 1px;
+      white-space: nowrap;
+    }
+
+    /* Three column articles layout */
+    .content {
+      position: absolute;
+      top: 334px;
+      left: 20px;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      column-gap: 18px;
+      width: 440px;
+    }
+
+    .content article {
+      color: #7d8b18;
+      font-size: 7.5px;
+      line-height: 1.35;
+    }
+
+    .content h2 {
+      margin: 0 0 5px;
+      color: #dce52a;
+      font-size: 7.5px;
+      font-weight: 400;
+      line-height: 1.3;
+    }
+
+    .content p {
+      margin: 0 0 5px;
+    }
+
+    /* Citation sources */
+    .source {
+      position: absolute;
+      left: 16px;
+      bottom: 14px;
+      width: 448px;
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      color: #7d8b18;
+      font-size: 5.5px;
+      line-height: 1.2;
+    }
+
+    .source div {
+      width: 50%;
+    }
+
+    .source a {
+      color: #7d8b18;
+      text-decoration: underline;
+      transition: color 0.2s ease;
+      word-break: break-all;
+    }
+
+    .source a:hover {
+      color: #dce52a;
+    }
+
+    /* Responsive scaling for smaller viewports */
+    @media (max-width: 480px) {
+      .page {
+        width: 100vw;
+        height: 100vw;
+      }
+    }
+  </style>
 </head>
 
 <body>
-  <header>
-    <h1>Is Your Phone Your Friend?</h1>
-    <p>
-      Nothing is free. What's ours?
-    </p>
-  </header>
-  <main>
-    <!-- We have to use the hover effect in which when user clicks on know it should change to own.-->
-    <section>
-      <h2>What Do They Know?</h2>
-      <p>
-        What do you Own?
-      </p>
-      <p>
-        Do they know where we go?
-      </p>
-      <p>
-        Do they know what we search?
-      </p>
-    </section>
 
-    <section>
+  <div class="page">
 
-      <h2>Who Is Watching?</h2>
-      <ul>
-        <li>Amazon</li>
-        <li>Apple</li>
-        <li>Google</li>
-        <li>Meta</li>
-        <li>X</li>
-      </ul>
+    <!-- Top-left staircase text -->
+    <div class="what">
+      <span>WHAT</span>
+      <span class="do-one">do ...</span>
+      <span class="do-two">do</span>
+      <span class="do-three">do</span>
+    </div>
 
-    </section>
+    <!-- Tech company list -->
+    <div class="companies">
+      <span>Amazon,</span>
+      <span>Apple,</span>
+      <span>Google,</span>
+      <span>Meta,</span>
+      <span>X</span>
+    </div>
 
-    <!--Privacy Manifesto-->
-    <section>
-      <h2>Is Your Phone Your Friend?</h2>
+    <!-- Main visual composition -->
+    <div class="visual">
+
+      <div class="they">THEY</div>
+
+      <div class="you">YOU</div>
+
+      <!-- Hover to switch KNOW <-> OWN -->
+      <div class="word-switch">
+        <span class="know">KNOW</span>
+        <span class="own">OWN</span>
+      </div>
+
+      <div class="question-mark">?</div>
+
+    </div>
+
+    <!-- Sub-text -->
+    <div class="free-text">
+      nothing is free<br>
+      what's ours?
+    </div>
+
+    <!-- Divider -->
+    <div class="line"></div>
+
+    <!-- Main question header -->
+    <h1 class="main-title">
+      IS YOUR PHONE YOUR FRIEND?
+    </h1>
+
+    <!-- 3 column body content -->
+    <section class="content">
+
       <article>
-        <h3>How often do you read the fine print?</h3>
+        <h2>
+          How often do you read<br>
+          the fine print?
+        </h2>
         <p>
-          Private policies are long, convoluted, and
-          inaccessible on purpose.
+          Private policies are long, convoluted, and inaccessible on purpose.
         </p>
-
         <p>
           How often do you go to reject cookies?
         </p>
-
         <p>
           How often are you given the choice?
         </p>
       </article>
 
       <article>
-        <h3>What did you agree to share?</h3>
+        <h2>
+          What did you agree to share?
+        </h2>
         <p>
-          120,000 Flock cameras are presently installed in both
-          urban and rural areas on highways, in neibourhoods.
+          120,000 Flock cameras are presently installed in both urban and rural areas on highways, in neighborhoods (ACLU, 2025).
         </p>
-
         <p>
           Everywhere you drive they know!
         </p>
         <p>
-          Axon, Vigilant Solutions, Motorola Solutions, Genetec,
-          PlateSmart, Innova Systems, Rekor, ELSAG, Perceptics,
-          and Jenoptik all follow you!
+          Axon, Vigilant Solutions (Motorola Solutions), Genetec, PlateSmart, Innova Systems, Rekor, ELSAG, Perceptics, and Jenoptik all follow you!
         </p>
       </article>
 
       <article>
-        <h3>What does Google collect?</h3>
+        <h2>
+          Google ALONE collects your;
+        </h2>
         <p>
-          Google ALONE collects your:
-        </p>
-        <p>
-          Name, Username, Password, Phone Number, Payment Information,
-          Address, Email, Emails written and received, Videos,
-          & photos, Photos & Files Metadata, Stored Documents &
-          Spreadsheets, Youtube Comments and Contact Info.
+          Name, Username, Password, Phone Number, Payment Information, Address, Email, Emails written and received, Videos & Photos, Photos & Files Metadata, Stored Documents & Spreadsheets, YouTube Comments, & Contact Info.
         </p>
       </article>
+
     </section>
 
-    <!--
-    The assignment requires hyperlink.
-    This link is connected directly to the subject pf the manifesto.
-    -->
-    <section>
-      <h2>Source</h2>
-      <p>
-        <a href="https://www.aclu.org/campaigns-initiatives/get-the-flock-out" target="_blank"
-          rel="noopener noreferrer">Get the Flock Out - ACLU</a>
+    <!-- Citation sources -->
+    <footer class="source">
+      <div>
+        Get the flock out. (2026). Retrieved from
+        <a href="https://www.aclu.org/campaigns-initiatives/get-the-flock-out" target="_blank" rel="noopener noreferrer">
+          https://www.aclu.org/campaigns-initiatives/get-the-flock-out
+        </a>
+      </div>
 
-      </p>
-    </section>
-  </main>
-  <footer>
-    <p>
-      View Source - Privacy Manifesto
-    </p>
-  </footer>
+      <div>
+        Get the flock out. (2026). Retrieved from
+        <a href="https://www.aclu.org/campaigns-initiatives/get-the-flock-out" target="_blank" rel="noopener noreferrer">
+          https://www.aclu.org/campaigns-initiatives/get-the-flock-out
+        </a>
+      </div>
+    </footer>
+
+  </div>
+
 </body>
 
 </html>
